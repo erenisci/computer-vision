@@ -1,8 +1,10 @@
 import cv2
 
-face_detector = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+face_detector = cv2.CascadeClassifier(
+    "Cascades/haarcascade_frontalface_default.xml")
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
-face_recognizer.read("lbph_classifier.yml")
+face_recognizer.read("Weights/lbph_classifier.yml")
+
 width, height = 220, 220
 font = cv2.FONT_HERSHEY_COMPLEX_SMALL
 camera = cv2.VideoCapture(0)
@@ -16,11 +18,13 @@ while (True):
         image_face = cv2.resize(image_gray[y:y + w, x:x + h], (width, height))
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
         id, confidence = face_recognizer.predict(image_face)
+
         name = ""
         if id == 1:
             name = 'Jones'
         elif id == 2:
             name = 'Gabriel'
+
         cv2.putText(image, name, (x, y + (w+30)), font, 2, (0, 0, 255))
         cv2.putText(image, str(confidence),
                     (x, y + (h+50)), font, 1, (0, 0, 255))
