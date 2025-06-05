@@ -7,7 +7,7 @@ face_recognizer.read("Models/lbph_classifier_own.yml")
 
 width, height = 220, 220
 font = cv2.FONT_HERSHEY_COMPLEX_SMALL
-camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture(2)
 
 while True:
     connected, image = camera.read()
@@ -16,11 +16,11 @@ while True:
 
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     detections = face_detector.detectMultiScale(
-        image_gray, scaleFactor=1.5, minSize=(30, 30))
+        image_gray, scaleFactor=1.09, minNeighbors=9, minSize=(40, 40))
 
     for (x, y, w, h) in detections:
         image_face = cv2.resize(image_gray[y:y + h, x:x + w], (width, height))
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2)
 
         id, confidence = face_recognizer.predict(image_face)
 
@@ -33,9 +33,9 @@ while True:
             elif id == 3:
                 name = 'Eren'
 
-        cv2.putText(image, name, (x, y + h + 30), font, 2, (0, 0, 255), 2)
+        cv2.putText(image, name, (x, y + h + 30), font, 1.2, (0, 255, 255), 1)
         cv2.putText(image, f'{confidence:.2f}',
-                    (x, y + h + 60), font, 1, (0, 0, 255), 1)
+                    (x, y + h + 60), font, 1, (0, 255, 255), 1)
 
     cv2.imshow("Face", image)
     if cv2.waitKey(1) == ord('q'):
