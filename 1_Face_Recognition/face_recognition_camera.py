@@ -25,7 +25,7 @@ while True:
         id, confidence = face_recognizer.predict(image_face)
 
         name = 'Ufo'
-        if confidence < 60:
+        if confidence < 65:
             if id == 1:
                 name = 'Jones'
             elif id == 2:
