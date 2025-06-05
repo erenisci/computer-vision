@@ -16,7 +16,7 @@ while True:
 
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     detections = face_detector.detectMultiScale(
-        image_gray, scaleFactor=1.09, minNeighbors=9, minSize=(40, 40))
+        image_gray, scaleFactor=1.09, minNeighbors=20, minSize=(50, 50))
 
     for (x, y, w, h) in detections:
         image_face = cv2.resize(image_gray[y:y + h, x:x + w], (width, height))
@@ -24,13 +24,15 @@ while True:
 
         id, confidence = face_recognizer.predict(image_face)
 
-        name = 'Ufo'
-        if confidence < 65:
+        name = 'UFO'
+        if confidence < 70:
             if id == 1:
-                name = 'Jones'
+                name = 'Elif'
             elif id == 2:
-                name = 'Gabriel'
+                name = 'Ercan'
             elif id == 3:
+                name = 'Selin'
+            elif id == 4:
                 name = 'Eren'
 
         cv2.putText(image, name, (x, y + h + 30), font, 1.2, (0, 255, 255), 1)
