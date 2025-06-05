@@ -1,3 +1,4 @@
+# KCF (Kernelized Correlation Filter)
 import cv2
 
 tracker = cv2.TrackerKCF_create()
@@ -26,8 +27,10 @@ while True:
     if ok:
         (x, y, w, h) = [int(v) for v in bbox]
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2, 1)
+        cv2.putText(frame, 'Object', (x, y + h + 30),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 255), 2)
     else:
-        cv2.putText(frame, 'Error', (100, 80),
+        cv2.putText(frame, 'Error', (110, 55),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
     cv2.imshow('Tracking', frame)
