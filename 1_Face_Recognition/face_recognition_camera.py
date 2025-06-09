@@ -26,12 +26,6 @@ while True:
 
         name = 'UFO'
         if confidence < 70:
-            if id == 1:
-                name = 'Elif'
-            elif id == 2:
-                name = 'Ercan'
-            elif id == 3:
-                name = 'Selin'
             elif id == 4:
                 name = 'Eren'
 
