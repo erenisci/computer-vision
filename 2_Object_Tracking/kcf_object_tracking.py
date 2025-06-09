@@ -35,5 +35,5 @@ while True:
 
     cv2.imshow('Tracking', frame)
 
-    if cv2.waitKey(delay) & 0XFF == 27:  # ESC
+    if cv2.waitKey(delay) & 0XFF == 27:  # Escape
         break
